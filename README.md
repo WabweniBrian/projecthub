@@ -1,6 +1,6 @@
 # PROJECTHUB - A Realtime Project Management Platform
 
-This is a simple realtime project management platform with pusher. It includes features like:
+This is a simple realtime project management platform with pusher:
 
 ## Built With
 

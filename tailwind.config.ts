@@ -47,7 +47,8 @@ const config = {
           "linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('/images/burger.png')",
       },
       colors: {
-        brand: "#FF3A44",
+        brand: "#0093B8",
+        main: "#f5f5f9",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -35,7 +35,7 @@ export async function createToken(user: {
 }
 
 export function setAuthCookie(token: string): void {
-  cookies().set("auth_token", token, {
+  cookies().set("projecthub_session_token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
@@ -54,7 +54,7 @@ export async function verifyToken(token: string) {
 }
 
 export async function getServerSession() {
-  const token = cookies().get("auth_token")?.value;
+  const token = cookies().get("projecthub_session_token")?.value;
   if (!token) return null;
   return verifyToken(token);
 }

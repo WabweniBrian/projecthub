@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/common/theme-provider";
 import BackToTopButton from "@/components/common/back-button";
 
 export const viewport: Viewport = {
-  themeColor: "#FF3A44",
+  themeColor: "#0093B8",
 };
 
 const poppins = Poppins({
@@ -18,11 +18,10 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Demo",
-    default: "Demo",
+    template: "%s | ProjectHub",
+    default: "ProjectHub",
   },
-  // manifest: "/manifest.json",
-  description: "Demo",
+  description: "Project Management Platform",
 };
 
 export default function RootLayout({
@@ -34,7 +33,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={poppins.className}>
         {/* Next top loader: Appears at the top of the page on page transition */}
-        <NextTopLoader color={"#FF3A44"} zIndex={9999} />
+        <NextTopLoader color={"#0093B8"} zIndex={9999} />
         {/* Toaster */}
         <Toaster
           toastOptions={{
@@ -45,10 +44,10 @@ export default function RootLayout({
         />
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem={false}
           disableTransitionOnChange
-          storageKey="demo-theme"
+          storageKey="projecthub-theme"
         >
           {children}
           <BackToTopButton />

@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { verifyToken } from "./lib/auth";
 
 export async function middleware(request: NextRequest) {
-  const token = request.cookies.get("auth_token")?.value;
+  const token = request.cookies.get("projecthub_session_token")?.value;
   const { pathname } = request.nextUrl;
 
   const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
@@ -36,7 +36,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     } else {
       const response = NextResponse.next();
-      response.cookies.delete("auth_token");
+      response.cookies.delete("projecthub_session_token");
       return response;
     }
   } else {

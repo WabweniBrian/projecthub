@@ -32,7 +32,7 @@ export const PasswordResetEmail = ({ url }: { url: string }) => {
           theme: {
             extend: {
               colors: {
-                brand: "#FF3A44",
+                brand: "#0093B8",
               },
             },
           },

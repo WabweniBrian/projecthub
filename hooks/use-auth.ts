@@ -1,19 +1,11 @@
 "use client";
 
-import { UserRole } from "@prisma/client";
+import { SessionUser } from "@/types";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  image: string | null;
-  role: UserRole;
-};
-
 export const useAuth = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<SessionUser | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -47,7 +39,7 @@ export const useAuth = () => {
       .catch(console.error);
   }
 
-  async function updateUser(updatedData: Partial<User>) {
+  async function updateUser(updatedData: Partial<SessionUser>) {
     try {
       const res = await fetch("/api/user", {
         method: "PATCH",

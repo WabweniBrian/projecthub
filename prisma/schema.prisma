@@ -1,6 +1,7 @@
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 generator client {
@@ -13,7 +14,7 @@ enum UserRole {
 }
 
 model User {
-  id                   String    @id @default(uuid())
+  id                   String    @id @default(cuid())
   name                 String
   email                String    @unique
   password             String?
@@ -27,4 +28,61 @@ model User {
   resetPasswordExpires DateTime?
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
+
+  assignedProjects Project[]
+  projectsCreated  Project[] @relation("ProjectsCreated")
+  tasks            Task[]
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  createdById String
+  name        String
+  description String?
+  status      ProjectStatus @default(ACTIVE)
+
+  createdBy User @relation("ProjectsCreated", fields: [createdById], references: [id], onDelete: Cascade)
+
+  tasks   Task[]
+  members User[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Task {
+  id           String  @id @default(cuid())
+  projectId    String
+  assignedToId String?
+  title        String
+  description  String?
+
+  status   TaskStatus   @default(TODO)
+  priority TaskPriority @default(MEDIUM)
+
+  project    Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  assignedTo User?   @relation(fields: [assignedToId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ProjectStatus {
+  ACTIVE
+  ARCHIVED
+  COMPLETED
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  REVIEW
+  DONE
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
 }

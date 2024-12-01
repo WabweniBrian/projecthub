@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 
 const url =
   process.env.NODE_ENV === "production"
-    ? "https://bare-auth.vercel.app"
+    ? "https://projecthub-pusher.vercel.app"
     : "http://localhost:3000";
 
 export const sendEmailVerification = async (email: string) => {
